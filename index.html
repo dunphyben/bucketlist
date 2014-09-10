@@ -33,15 +33,15 @@
             });
 
             // Reading data
-            var item = new Apigee.Collection({ "client":client, "type":"books" }); // creates a new variable that we read our data into
-            books.fetch(
+            var items = new Apigee.Collection({ "client":client, "type":"items" }); // creates a new variable that we read our data into app
+            items.fetch( // comment in the fetch method on the apigee sdk taht says this is a get method
                 function(err, data) { // Success
                     if (err) {
                         alert("read failed");
                     } else {
-                        while(books.hasNextEntity()) {
-                            var book = books.getNextEntity();
-                            alert(book.get("title")); // Output the title of the book
+                        while(items.hasNextEntity()) { // while is a loop that runs as long as the argument == true. hasNextEntity is a method that says "do you ahve stuff? if yes, continue to do this by going to next line"
+                            var item = items.getNextEntity();
+                            alert(item.get("title")); // Output the title of the item
                         }
                     }
                 });
