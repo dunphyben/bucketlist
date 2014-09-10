@@ -39,10 +39,12 @@
                     if (err) {
                         alert("read failed");
                     } else {
+                        $('#bucketlist').empty();
                         while(items.hasNextEntity()) { // while is a loop that runs as long as the argument == true. hasNextEntity is a method that says "do you ahve stuff? if yes, continue to do this by going to next line"
                             var item = items.getNextEntity();
-                            alert(item.get("title")); // Output the title of the item
+                            $("#bucketlist").append('<li><a href="#page-add">' + item.get("title")+'</a></li>')); // $ means jQuery. Finds the element that has an id of "bucketlist". if you take it out of quotes it takes it as a variable name. // We want to append the item title
                         }
+                        $('#bucketlist').listview('refresh');
                     }
                 });
 
