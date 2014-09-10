@@ -38,13 +38,16 @@
                 function(err, data) { // Success
                     if (err) {
                         alert("read failed");
+                        $('#bucketlist').html(localStorage.getItem('items'))
                     } else {
                         $('#bucketlist').empty();
                         while(items.hasNextEntity()) { // while is a loop that runs as long as the argument == true. hasNextEntity is a method that says "do you ahve stuff? if yes, continue to do this by going to next line"
                             var item = items.getNextEntity();
-                            $("#bucketlist").append('<li><a href="#page-add">' + item.get("title")+'</a></li>')); // $ means jQuery. Finds the element that has an id of "bucketlist". if you take it out of quotes it takes it as a variable name. // We want to append the item title
+                            $('#bucketlist').append('<li><a href="#page-add"><h3>' + item.get('title') + '</h3></a></li>')
+                 // $ means jQuery. Finds the element that has an id of "bucketlist". if you take it out of quotes it takes it as a variable name. // We want to append the item title
                         }
-                        $('#bucketlist').listview('refresh');
+                        $('#bucketlist').listview('refresh'); // write the data after this line. Always think about the user experience. Always thinka bout a way to distract your user (spinny wheel) when you are loading something that might take long
+                        localStorage.setItem('items', items.serialize); // serialize puts the items object into a readable format
                     }
                 });
 
