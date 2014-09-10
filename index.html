@@ -34,7 +34,11 @@
 
         var items = new Apigee.Collection({
             "client": client,
-            "type": "items"
+            "type": "items",
+            "qs": { // qs stands for query string
+                limit: 25, // a key in a json object does not have to be in quotes
+                "ql": "order by title"  // ql stands for query language. a ql must be enclosed in double-quotes. can do "title_contains 'run'". To do starts with do "title_contains 'run*' order_by title"
+            }
         });
 
         function populateList(collection) {
@@ -103,7 +107,7 @@
         </header>
         <!-- /header -->
         <article data-role="content" id="contentlist">
-            <ul data-role="listview" id="bucketlist" class="mybucketlist">
+            <ul data-role="listview" id="bucketlist" class="mybucketlist"> 
                 <li>
                     <a href="#page-add">
                         <h3>My first bucketlist item</h3>
